@@ -1,0 +1,49 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Estruturas de programação:
+if
+```{r}
+a = 10 
+b = 20
+if (a < b)
+{
+  print('verdadeiro')
+}else
+{
+  print('Falso')
+  }
+
+
+
+```
+```{r}
+x = ifelse(  a>10, "a é maior", "a não é maior")
+x
+```
+Condição falsa acima
+``
+```{r}
+for (i in 1:10) {
+  print(i)
+}
+```
+
+
+```{r}
+a = 1
+while(a <= 10)
+{
+  print(a)
+  a = a +1
+}
+```
+Função:
+```{r} 
+parouimpar = function(x) {
+  return(ifelse(x%%2==0, "par", "impar"))
+}
+parouimpar(6)
+parouimpar(5)
+```
