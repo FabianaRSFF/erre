@@ -60,7 +60,7 @@ summary(dados$Salário)
 # Ver mediana:
 median(dados$Salário,na.rm=T)
 # Atribuir mediana a NAs:
-dados[is.na(dados$Salário),]$Salário = median(dados$Salário,na.rm=T)
+dados[is.na(dados$Salário) ,]$Salário = median(dados$Salário, na.rm=T)
 #Buscar NAs em salário para checar:
 dados[!complete.cases(dados$Salário),]
 ```
@@ -83,5 +83,14 @@ Idades fora do domínio:
 ```{r}
 summary(dados$Idade)
 # fora do domínio, ver idades anormais
-dados[dados$Idade < 0  ]
+dados[dados$Idade<0 | dados$Idade>110 , ]$Idade
+# Não temos idades NAs
+dados[is.na(dados$Idade),]
+# Opção preencher com mediana
+median(dados$Idade)
+# Substituição
+dados[dados$Idade<0 | dados$Idade>110 ,]$Idade = median(dados$Idade)
+#Buscamos novamente idades anormais
+dados[dados$Idade<0 | dados$Idade>110 ,]
+summary(dados$Idade)
 ```
