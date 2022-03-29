@@ -1,0 +1,19 @@
+Ana = 8L
+Paulo = 12L
+
+if (Ana < Paulo)
+{
+  print('Falso')
+}else
+{
+  print('Verdadeiro')
+}
+
+delta = BOD
+class(delta)
+
+for ( i in 1:10)
+if (i%%2==0)
+  print(i)
+
+tail(women, n = 10)
