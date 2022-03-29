@@ -1,0 +1,14 @@
+---
+title: "R Notebook"
+output: html_notebook
+Exercício2
+```{r}
+dados = read.csv("tempo.csv",sep = ";", na.strings="", stringAsfactors=T)
+head(dados)
+summary(dados)
+```
+---
+```
+
+
+
