@@ -94,3 +94,45 @@ dados[dados$Idade<0 | dados$Idade>110 ,]$Idade = median(dados$Idade)
 dados[dados$Idade<0 | dados$Idade>110 ,]
 summary(dados$Idade)
 ```
+Dados duplicados:
+```{r}
+# Buscar duplicados pelo id:
+x = dados[duplicated(dados$Id),]
+x
+# Excluir dados pelo Id:
+dados = dados[-c(82),]
+# Verificar novamente
+x = dados[duplicated(dados$Id),]
+x
+summary(dados$Id)
+```
+Estado fora do domínio:
+```{r}
+# Fora do domínio - categórico
+unique(dados$Estado)
+summary(dados$Estado)
+# Preencher com a moda RS
+dados[!dados$Estado %in% c("RS", "SC", "PR"),]$Estado = "RS"
+summary(dados$Estado)
+# Removendo fatores não usados
+dados$Estado = factor(dados$Estado)
+# Visualizar novamente
+summary(dados$Estado)
+```
+Outliers:
+```{r}
+# Criando um parâmetro com desvio padrão
+desv = sd(dados$Salário, na.rm=T)
+desv
+dados[dados$Salário >= 2 *desv ,]$Salário
+# Outra forma sem os NAs
+boxplot(dados$Salário)
+boxplot(dados$Salário, outline= F)
+x = boxplot(dados$Salário)$out
+x
+# Atualizar todos para mediana
+median(dados$Salário)
+dados[dados$Salário >= 2 *desv , ]$Salário = median(dados$Salário)
+# Checamos se sairam os outliers
+dados[dados$Salário >= 2 *desv , ]$Salário
+```
