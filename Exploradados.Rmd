@@ -1,0 +1,87 @@
+
+
+```{r}
+dados = read.csv("Churn.csv", sep = ";", na.strings="", stringsAsFactors=T)
+head(dados)
+summary(dados)
+```
+# Dar nome às colunas:
+
+```{r}
+colnames(dados) = c("Id", "Score", "Estado", "Gênero", "Idade", "Patrimônio", "Saldo", "Produtos", "TemCartaoCredito", "Ativo", "Salário", "Saiu")
+head(dados)
+```
+
+Explorar dados, colunas categóricas:
+```{r}
+# Estados:
+counts = table(dados$Estado)
+barplot(counts, main="Estados", xlab="Estados")
+# Gênero
+counts = table(dados$Gênero)
+barplot(counts, main="Gêneros", xlab="Gêneros")
+```
+Explorar colunas numéricas:
+```{r}
+# Score:
+summary(dados$Score)
+boxplot(dados$Score)
+hist(dados$Score)
+```
+Idade:
+```{r}
+# Idade:
+summary(dados$Idade)
+boxplot(dados$Idade)
+hist(dados$Idade)
+```
+Saldos:
+```{r}
+# Saldos:
+summary(dados$Saldo)
+boxplot(dados$Saldo)
+hist(dados$Saldo)
+```
+```{r}
+# Salário
+summary(dados$Salário)
+boxplot(dados$Salário)
+hist(dados$Salário)
+```
+Valores faltantes (NAs):
+```{r}
+dados[!complete.cases(dados),]
+```
+
+
+```{r}
+# Tratar salários:
+summary(dados$Salário)
+# Ver mediana:
+median(dados$Salário,na.rm=T)
+# Atribuir mediana a NAs:
+dados[is.na(dados$Salário),]$Salário = median(dados$Salário,na.rm=T)
+#Buscar NAs em salário para checar:
+dados[!complete.cases(dados$Salário),]
+```
+Falta de padronização em gênero:
+```{r}
+# ver valores
+unique(dados$Gênero)
+summary(dados$Gênero)
+# Transformar F em feminino M em masculino
+dados[is.na(dados$Gênero) | dados$Gênero == "M",]$Gênero = "Masculino"
+dados[dados$Gênero == "F" | dados$Gênero == "Fem",]$Gênero = "Feminino"
+# ver resultado
+summary(dados$Gênero)
+# Remover levels não utilizados
+dados$Gênero = factor(dados$Gênero)
+# Vizualizar novamente
+summary(dados$Gênero)
+```
+Idades fora do domínio:
+```{r}
+summary(dados$Idade)
+# fora do domínio, ver idades anormais
+dados[dados$Idade < 0  ]
+```
