@@ -1,18 +1,93 @@
----
-title: "R Notebook"
-output: html_notebook
----
-
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
+Histograma:
 ```{r}
-plot(cars)
+trees
+hist(trees$Height)
+hist(trees$Height, main = "Árvores", ylab = "Frequência", xlab = "Altura", col = "blue")
+hist(trees$Height, main = "Árvores", ylab = "Frequência", xlab = "Altura", col = "blue", density = 20, breaks = 20)
 ```
-
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+Densidade:
+```{r}
+densidade = density(trees$Height)
+plot(densidade)
+```
+Densidade sobre o hitstograma, parâmetro par
+```{r}
+hist(trees$Height, main = NULL, xlab = NULL, ylab = NULL)
+par(new=TRUE)
+plot(densidade)
+```
+Dispersão:
+```{r}
+plot(trees$Girth, trees$Volume)
+plot(trees$Girth, trees$Volume, main = "Árvores")
+plot(trees$Girth, trees$Volume, ylab = "Circunferência", xlab = "Volume", col = "blue", main = "Árvores")
+# pch muda o elemento gráfico
+plot(trees$Girth, trees$Volume, ylab = "Circunferência", xlab = "Volume", col = "blue", main = "Árvores", pch = 20)
+```
+Muda tipo:
+```{r}
+plot(trees$Girth, trees$Volume, ylab = "Circunferência", xlab = "Volume", col = "blue", main = "Árvores", pch = 20, type = "l")
+```
+Tremulação diminui sobreposição:
+```{r}
+plot(jitter(trees$Girth), trees$Volume, ylab = "Circunferência", xlab = "Volume", col = "blue", main = "Árvores")
+```
+Legenda com dimensão categórica:
+```{r}
+CO2
+plot(CO2$conc, CO2$uptake, pch = 20, col = CO2$Treatment)
+legend("bottomright", legend = c("nonchilled", "chilled"), cex = 1, fill = c("black", "red"))
+```
+Novos dados:
+```{r}
+plot(trees)
+```
+Divisão de tela:
+```{r}
+split.screen(figs = c(2, 2))
+screen(1)
+plot(trees$Girth, trees$Volume)
+screen(2)
+plot(trees$Girth, trees$Height)
+screen(3)
+plot(trees$Height, trees$Volume)
+screen(4)
+hist(trees$Volume)
+close.screen(all=TRUE)
+```
+Boxplot:
+```{r}
+boxplot(trees$Volume, main = "Árvores", xlab="Volume")
+boxplot(trees$Volume, main = "Árvores", xlab="Volume", col = "blue", horizontal = TRUE)
+boxplot(trees$Volume, main = "Árvores", xlab="Volume", col = "blue", outline = F)
+```
+Notch:
+```{r}
+boxplot(trees$Height, main = "Árvores", xlab = "Altura", col = "blue", notch = TRUE)
+boxplot.stats(trees$Height)
+boxplot.stats(trees$Height)$stats
+```
+Vários gráficos:
+```{r}
+boxplot(trees)
+```
+Agregação:
+```{r}
+InsectSprays
+spray = aggregate(.~spray, data = InsectSprays, sum)
+spray
+```
+Gráfico de Barras:
+```{r}
+barplot(spray$count, col = gray.colors(6), xlab = "Spray", ylab = "Total", names.arg = spray$spray)
+box()        
+```
+Gráfico de setor:
+```{r}
+pie(spray$count, labels = spray$spray, main = "Spray", col = c(1:6))
+```
+Pizza com legenda:
+```{r}
+pie(spray$count, labels = NA, main = "Spray", col = c(1:6))
+legend("bottomright", legend = spray$spray, cex = 1, fill = c(1:6))
+```
