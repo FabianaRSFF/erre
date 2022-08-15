@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Exercício3:
+```{r}
+dados4 = read.csv("dados.csv", sep = ";", na.strings = "", stringsAsFactors = T)
+head(dados4)
+```
+
+
+```{r}
+summary(dados4)
+```
+
+Explorar dados, colunas categóricas:
+```{r}
+counts = table(dados4$MUNICIPIO)
+barplot(counts, main = "Municipio", xlab = "Municipio")
+```
+
+Histograma condicional:
+
+```{r}
+dados4
+histogram(dados4$PIB)
+
+```
+Dispersão:
+
+```{r}
+plot(dados4$MUNICIPIO, dados4$PIB)
+plot(dados4$MUNICIPIO, dados4$PIB, ylab = "MUNICIPIO", xlab = "PIB", col = "blue", main = "Abismo Social", pch = 20)
+plot(dados4$MUNICIPIO, dados4$PIB, ylab = "MUNICIPIO", xlab = "PIB", col = "blue", main = "Abismo Social", pch = 20, type="l")
+```
+
+
+```{r}
+plot(dados4)
+```
+PIB:
+```{r}
+summary(dados4$PIB)
+boxplot(dados4$PIB)
+hist(dados4$PIB)
+```
+Valor Empenho:
+```{r}
+summary(dados4$VALOREMPENHO)
+boxplot(dados4$VALOREMPENHO)
+hist(dados4$VALOREMPENHO)
+```
+

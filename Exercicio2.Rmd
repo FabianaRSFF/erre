@@ -1,14 +1,106 @@
 ---
-title: "R Notebook"
-output: html_notebook
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+---
+
 Exercício2
 ```{r}
-dados = read.csv("tempo.csv",sep = ";", na.strings="", stringAsfactors=T)
-head(dados)
-summary(dados)
-```
----
+dados2 = read.csv("tempo.csv",sep = ";", na.strings="", stringsAsFactors=T)
+head(dados2)
 ```
 
 
+```{r}
+summary(dados2)
+```
+```{r}
+counts = table(dados2$Aparencia)
+barplot(counts, main="Aparencia", xlab="Aparencia")
+```
+```{r}
+unique(dados2$Aparencia)
+```
+
+
+```
+```{r}
+# Aparencia
+summary(dados2$Aparencia)
+boxplot(dados2$Aparencia)
+hist(dados2$Aparencia)
+```
+```{r}
+# Temperatura
+summary(dados2$Temperatura)
+boxplot(dados2$Temperatura)
+hist(dados2$Temperatura)
+```
+```{r}
+# Umidade
+summary(dados2$Umidade)
+boxplot(dados2$Umidade)
+hist(dados2$Umidade)
+
+```
+```{r}
+# Vento
+summary(dados2$Vento)
+boxplot(dados2$Vento)
+hist(dados2$Vento)
+```
+
+
+```{r}
+# Jogar
+summary(dados2$Jogar)
+boxplot(dados2$Jogar)
+hist(dados2$Jogar)
+```
+
+```{r}
+summary(dados2$Id)
+dados2[!complete.cases(dados2),]
+summary(dados$Umidade)
+median(dados2$Umidade, na.rm=T)
+dados2[is.na(dados2$Umidade) ,]$Umidade = median(dados2$Umidade, na.rm=T)
+summary(dados$Umidade)
+dados2[!complete.cases(dados2$Umidade),]
+```
+
+
+```{r}
+dados2 = dados2[-c(4),]
+```
+
+
+```{r}
+dados2 = read.csv("tempo.csv",sep = ";", na.strings="", stringsAsFactors=T)
+head(dados2)
+```
+```{r}
+unique(dados2$Umidade)
+dados2$Umidade = factor(dados2$Umidade)
+unique(dados2$Umidade)
+```
+```{r}
+dados2 = read.csv("tempo.csv",sep = ";", na.strings="", stringsAsFactors=T)
+head(dados2)
+```
+```{r}
+boxplot(dados2$Umidade)
+boxplot(dados2$Umidade, outline= F)
+x = boxplot(dados2$Umidade)$out
+x
+dados2 = dados2[-c(4),]
+```
+```{r}
+dados2 = read.csv("tempo.csv",sep = ";", na.strings="", stringsAsFactors=T)
+head(dados2)
+```
+```{r}
+dados2$Umidade = factor(dados2$Umidade(Id=4))
+rownames(dados2)
+dodos3 = dados2[(-4),]
 
